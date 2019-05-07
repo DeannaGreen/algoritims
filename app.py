@@ -115,6 +115,23 @@ def students():
                 count += 1
     return "yay"
 
+@app.route("/dupe")
+def dupe():
+    words = ["car", "dog", "cat", "car", "fish", "dog"]
+    for word in range(0, (len(words) -1), +1):
+        count = 0
+        while count < len(words):
+            if word != count:
+                # print(words[word])
+                # print(words[count])
+                if words[word] == words[count]:
+                    print("dulicate word: " + words[word])
+                    count += 1
+                else:
+                    count += 1
+            else:
+                count += 1
+    return "yay"
 
 if __name__ == "__main__":
   app.run()
