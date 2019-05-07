@@ -3,9 +3,15 @@ import time
 import random
 import numpy
 from random import randint
-import graph
+import matplotlib.pyplot as plt
 
 app = Flask(__name__)
+
+global x_co_ord
+x_co_ord = []
+
+global y_co_ord
+y_co_ord = []
 
 @app.route("/")
 def hello():
@@ -14,12 +20,15 @@ def hello():
 @app.route("/sort")
 def sort_time():
   x = randint(1,1000)
+  x_co_ord.append(x)
   list = numpy.random.random_integers(1, 1000, x)
-  # print(list)
   current_time = time.time()
   list.sort()
   time_now = time.time()
   final_time = time_now - current_time
+  y_co_ord.append(final_time)
+  print(x_co_ord)
+  print(y_co_ord)
   return str(final_time) + " seconds and " + str(x) + " elements in array"
 
 @app.route("/last")
