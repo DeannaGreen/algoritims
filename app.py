@@ -20,7 +20,7 @@ def sort_time():
   list.sort()
   time_now = time.time()
   final_time = time_now - current_time
-  return str(final_time)
+  return str(final_time) + " seconds and " + str(x) + " elements in array"
 
 @app.route("/last")
 def last_time():
@@ -30,17 +30,17 @@ def last_time():
   list[-1]
   time_now = time.time()
   final_time = time_now - current_time
-  return str(final_time)
+  return str(final_time) + " seconds and " + str(x) + " elements in array"
 
 @app.route("/reverse")
 def reverse_time():
   x = randint(1,1000)
   list = numpy.random.random_integers(1, 1000, x)
   current_time = time.time()
-  list.reverse()
+  list[:] = list[::-1]
   time_now = time.time()
   final_time = time_now - current_time
-  return str(final_time)
+  return str(final_time) + " seconds and " + str(x) + " elements in array"
 
 @app.route("/shuffle")
 def shuffle_time():
@@ -50,7 +50,7 @@ def shuffle_time():
   random.shuffle(list)
   time_now = time.time()
   final_time = time_now - current_time
-  return str(final_time)
+  return str(final_time) + " seconds and " + str(x) + " elements in array"
 
 if __name__ == "__main__":
   app.run()
