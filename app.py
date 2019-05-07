@@ -1,17 +1,13 @@
-from flask import Flask
+from flask import Flask, render_template,request
+from flask import jsonify
+import json
 import time
 import random
 import numpy
 from random import randint
-import matplotlib.pyplot as plt
+import matplotlib.pyplot as plt, mpld3
 
 app = Flask(__name__)
-
-global x_co_ord
-x_co_ord = []
-
-global y_co_ord
-y_co_ord = []
 
 @app.route("/")
 def hello():
@@ -19,11 +15,38 @@ def hello():
 
 @app.route("/sort")
 def sort_time():
+  co_ords = []
+  for i in range (0, 1001, +50):
+      list = numpy.random.random_integers(1, 1000, i)
+      current_time = time.time()
+      list.sort()
+      time_now = time.time()
+      final_time = time_now - current_time
+      co_ords.append([i, final_time])
+  print(co_ords)
+  return jsonify(co_ords)
+
+@app.route("/last")
+def last_time():
+  for i in range (1, 1001, +50):
+      x_co_ord.append(i)
+      list = numpy.random.random_integers(1, 1000, i)
+      current_time = time.time()
+      list[-1]
+      time_now = time.time()
+      final_time = time_now - current_time
+      y_co_ord.append(final_time)
+      print(x_co_ord)
+      print(y_co_ord)
+  return str(final_time) + " seconds and " + str(i) + " elements in array"
+
+@app.route("/reverse")
+def reverse_time():
   x = randint(1,1000)
   x_co_ord.append(x)
   list = numpy.random.random_integers(1, 1000, x)
   current_time = time.time()
-  list.sort()
+  list[:] = list[::-1]
   time_now = time.time()
   final_time = time_now - current_time
   y_co_ord.append(final_time)
@@ -31,39 +54,24 @@ def sort_time():
   print(y_co_ord)
   return str(final_time) + " seconds and " + str(x) + " elements in array"
 
-@app.route("/last")
-def last_time():
-  x = randint(1,1000)
-  list = numpy.random.random_integers(1, 1000, x)
-  current_time = time.time()
-  list[-1]
-  time_now = time.time()
-  final_time = time_now - current_time
-  return str(final_time) + " seconds and " + str(x) + " elements in array"
-
-@app.route("/reverse")
-def reverse_time():
-  x = randint(1,1000)
-  list = numpy.random.random_integers(1, 1000, x)
-  current_time = time.time()
-  list[:] = list[::-1]
-  time_now = time.time()
-  final_time = time_now - current_time
-  return str(final_time) + " seconds and " + str(x) + " elements in array"
-
 @app.route("/shuffle")
 def shuffle_time():
   x = randint(1,1000)
+  x_co_ord.append(x)
   list = numpy.random.random_integers(1, 1000, x)
   current_time = time.time()
   random.shuffle(list)
   time_now = time.time()
   final_time = time_now - current_time
+  y_co_ord.append(final_time)
+  print(x_co_ord)
+  print(y_co_ord)
   return str(final_time) + " seconds and " + str(x) + " elements in array"
 
 @app.route("/my_shuffle")
 def my_shuffle():
   x = randint(1,100)
+  x_co_ord.append(x)
   list = numpy.random.random_integers(1, 100, x)
   current_time = time.time()
   print(list)
@@ -73,21 +81,29 @@ def my_shuffle():
   print(list)
   time_now = time.time()
   final_time = time_now - current_time
+  y_co_ord.append(final_time)
+  print(x_co_ord)
+  print(y_co_ord)
   return str(final_time) + " seconds and " + str(x) + " elements in array"
 
 @app.route("/my_last")
 def my_last():
   x = randint(1,100)
+  x_co_ord.append(x)
   list = numpy.random.random_integers(1, 100, x)
   current_time = time.time()
   list[-1]
   time_now = time.time()
   final_time = time_now - current_time
+  y_co_ord.append(final_time)
+  print(x_co_ord)
+  print(y_co_ord)
   return str(final_time) + " seconds and " + str(x) + " elements in array"
 
 @app.route("/my_reverse")
 def my_reverse():
   x = randint(1,100)
+  x_co_ord.append(x)
   list = numpy.random.random_integers(1, 100, x)
   current_time = time.time()
   print(list)
@@ -100,11 +116,16 @@ def my_reverse():
   print(list)
   time_now = time.time()
   final_time = time_now - current_time
+  y_co_ord.append(final_time)
+  print(x_co_ord)
+  print(y_co_ord)
   return str(final_time) + " seconds and " + str(x) + " elements in array"
 
 @app.route("/students")
 def students():
     names = ["john", "bob", "madison", "jenny"]
+    x_co_ord.append(len(names))
+    current_time = time.time()
     for name in range(0, (len(names) -1), +1):
         count = 0
         while count < len(names):
@@ -113,11 +134,18 @@ def students():
                 count += 1
             else:
                 count += 1
+    time_now = time.time()
+    final_time = time_now - current_time
+    y_co_ord.append(final_time)
+    print(x_co_ord)
+    print(y_co_ord)
     return "yay"
 
 @app.route("/dupe")
 def dupe():
     words = ["car", "dog", "cat", "car", "fish", "dog"]
+    x_co_ord.append(len(words))
+    current_time = time.time()
     for word in range(0, (len(words) -1), +1):
         count = 0
         while count < len(words):
@@ -131,7 +159,16 @@ def dupe():
                     count += 1
             else:
                 count += 1
+    time_now = time.time()
+    final_time = time_now - current_time
+    y_co_ord.append(final_time)
+    print(x_co_ord)
+    print(y_co_ord)
     return "yay"
+
+@app.route("/graph")
+def graph():
+    return render_template ("graph.html")
 
 if __name__ == "__main__":
   app.run()
