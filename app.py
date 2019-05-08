@@ -40,31 +40,28 @@ def last_time():
 
 @app.route("/reverse")
 def reverse_time():
-  x = randint(1,1000)
-  x_co_ord.append(x)
-  list = numpy.random.random_integers(1, 1000, x)
-  current_time = time.time()
-  list[:] = list[::-1]
-  time_now = time.time()
-  final_time = time_now - current_time
-  y_co_ord.append(final_time)
-  print(x_co_ord)
-  print(y_co_ord)
-  return str(final_time) + " seconds and " + str(x) + " elements in array"
+  co_ords = []
+  for i in range (1, 1001, +50):
+      list = numpy.random.random_integers(1, 1000, i)
+      current_time = time.time()
+      list[:] = list[::-1]
+      time_now = time.time()
+      final_time = time_now - current_time
+      co_ords.append([i, final_time])
+  return jsonify(co_ords)
 
 @app.route("/shuffle")
 def shuffle_time():
-  x = randint(1,1000)
-  x_co_ord.append(x)
-  list = numpy.random.random_integers(1, 1000, x)
-  current_time = time.time()
-  random.shuffle(list)
-  time_now = time.time()
-  final_time = time_now - current_time
-  y_co_ord.append(final_time)
-  print(x_co_ord)
-  print(y_co_ord)
-  return str(final_time) + " seconds and " + str(x) + " elements in array"
+  co_ords = []
+  for i in range (1, 1001, +50):
+      list = numpy.random.random_integers(1, 1000, i)
+      current_time = time.time()
+      random.shuffle(list)
+      time_now = time.time()
+      final_time = time_now - current_time
+      co_ords.append([i, final_time])
+  return jsonify(co_ords)
+
 
 @app.route("/my_shuffle")
 def my_shuffle():

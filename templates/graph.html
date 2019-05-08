@@ -4,28 +4,26 @@
 <script src="https://code.highcharts.com/modules/exporting.js"></script>
 <script src="https://code.highcharts.com/modules/export-data.js"></script>
 
-<div id="container"></div>
-<p>hello</p>
+<div id="sort"></div>
+
+<div id="last"></div>
+
+<div id="reverse"></div>
+
+<div id="shuffle"></div>
 
 <script>
-
   $(function () {
                var processed_json = new Array();
                $.getJSON('http://localhost:5000/sort', function(data) {
-                   // Populate series
-                   for (i = 0; i < data.length; i++){
-                       processed_json.push([data[i].key, data[i].value]);
-                   }
-                   console.log(data);
                    processed_json = data;
-
                    // draw chart
-                   $('#container').highcharts({
+                   $('#sort').highcharts({
                    chart: {
                        type: "line"
                    },
                    title: {
-                       text: "Time to Run Algorithms"
+                       text: "Time to Run Sort Algorithm"
                    },
                    xAxis: {
                        type: 'category',
@@ -40,7 +38,112 @@
                        }
                    },
                    series: [{
-                     name: 'Elements in Array',
+                     name: 'Sort',
+                       data: processed_json
+                   }]
+               });
+           });
+       });
+</script>
+
+
+<script>
+  $(function () {
+               var processed_json = new Array();
+               $.getJSON('http://localhost:5000/last', function(data) {
+                   processed_json = data;
+                   // draw chart
+                   $('#last').highcharts({
+                   chart: {
+                       type: "line"
+                   },
+                   title: {
+                       text: "Time to Run Last Algorithm"
+                   },
+                   xAxis: {
+                       type: 'category',
+                       allowDecimals: false,
+                       title: {
+                           text: ""
+                       }
+                   },
+                   yAxis: {
+                       title: {
+                           text: "Time (seconds)"
+                       }
+                   },
+                   series: [{
+                     name: 'Last',
+                       data: processed_json
+                   }]
+               });
+           });
+       });
+</script>
+
+
+<script>
+  $(function () {
+               var processed_json = new Array();
+               $.getJSON('http://localhost:5000/reverse', function(data) {
+                   processed_json = data;
+                   // draw chart
+                   $('#reverse').highcharts({
+                   chart: {
+                       type: "line"
+                   },
+                   title: {
+                       text: "Time to Run Reverse Algorithm"
+                   },
+                   xAxis: {
+                       type: 'category',
+                       allowDecimals: false,
+                       title: {
+                           text: ""
+                       }
+                   },
+                   yAxis: {
+                       title: {
+                           text: "Time (seconds)"
+                       }
+                   },
+                   series: [{
+                     name: 'Reverse',
+                       data: processed_json
+                   }]
+               });
+           });
+       });
+</script>
+
+
+<script>
+  $(function () {
+               var processed_json = new Array();
+               $.getJSON('http://localhost:5000/shuffle', function(data) {
+                   processed_json = data;
+                   // draw chart
+                   $('#shuffle').highcharts({
+                   chart: {
+                       type: "line"
+                   },
+                   title: {
+                       text: "Time to Run Shuffle Algorithm"
+                   },
+                   xAxis: {
+                       type: 'category',
+                       allowDecimals: false,
+                       title: {
+                           text: ""
+                       }
+                   },
+                   yAxis: {
+                       title: {
+                           text: "Time (seconds)"
+                       }
+                   },
+                   series: [{
+                     name: 'Shuffle',
                        data: processed_json
                    }]
                });
