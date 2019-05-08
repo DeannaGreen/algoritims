@@ -1,0 +1,119 @@
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/series-label.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+<script src="https://code.highcharts.com/modules/export-data.js"></script>
+
+<div id="sort"></div>
+
+<div id="last"></div>
+
+<div id="reverse"></div>
+
+<div id="shuffle"></div>
+
+<script>
+  $(function () {
+               var processed_json = new Array();
+               $.getJSON('http://localhost:5000/my_shuffle', function(data) {
+                   processed_json = data;
+                   // draw chart
+                   $('#sort').highcharts({
+                   chart: {
+                       type: "line"
+                   },
+                   title: {
+                       text: "Time to Run My Shuffle Algorithm"
+                   },
+                   xAxis: {
+                       type: 'category',
+                       allowDecimals: false,
+                       title: {
+                           text: ""
+                       }
+                   },
+                   yAxis: {
+                       title: {
+                           text: "Time (seconds)"
+                       }
+                   },
+                   series: [{
+                     name: 'Shuffle',
+                       data: processed_json
+                   }]
+               });
+           });
+       });
+</script>
+
+
+<script>
+  $(function () {
+               var processed_json = new Array();
+               $.getJSON('http://localhost:5000/my_last', function(data) {
+                   processed_json = data;
+                   // draw chart
+                   $('#last').highcharts({
+                   chart: {
+                       type: "line"
+                   },
+                   title: {
+                       text: "Time to Run My Last Algorithm"
+                   },
+                   xAxis: {
+                       type: 'category',
+                       allowDecimals: false,
+                       title: {
+                           text: ""
+                       }
+                   },
+                   yAxis: {
+                       title: {
+                           text: "Time (seconds)"
+                       }
+                   },
+                   colors: ["orange"],
+                   series: [{
+                     name: 'Last',
+                       data: processed_json
+                   }]
+               });
+           });
+       });
+</script>
+
+
+<script>
+  $(function () {
+               var processed_json = new Array();
+               $.getJSON('http://localhost:5000/my_reverse', function(data) {
+                   processed_json = data;
+                   // draw chart
+                   $('#reverse').highcharts({
+                   chart: {
+                       type: "line"
+                   },
+                   title: {
+                       text: "Time to Run My Reverse Algorithm"
+                   },
+                   xAxis: {
+                       type: 'category',
+                       allowDecimals: false,
+                       title: {
+                           text: ""
+                       }
+                   },
+                   yAxis: {
+                       title: {
+                           text: "Time (seconds)"
+                       }
+                   },
+                   colors: ["green"],
+                   series: [{
+                     name: 'Reverse',
+                       data: processed_json
+                   }]
+               });
+           });
+       });
+</script>
