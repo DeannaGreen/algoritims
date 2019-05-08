@@ -5,7 +5,6 @@ import time
 import random
 import numpy
 from random import randint
-import matplotlib.pyplot as plt, mpld3
 
 app = Flask(__name__)
 
@@ -127,17 +126,22 @@ def students():
     return "yay"
 
 @app.route("/dupe")
+
+# example: ["car", "dog", "cat", "car", "fish", "dog"] answer:dog car
+# loop over each element in the Array
+# compare each element to all other elements in the Array
+# if they match then print word
+# ignore cases of comparing itself
 def dupe():
-    words = ["car", "dog", "cat", "car", "fish", "dog"]
+    list = [1, 2, 1]
+    dupes = []
     current_time = time.time()
-    for word in range(0, (len(words) -1), +1):
+    for i in range(0, (len(list) -1), +1):
         count = 0
-        while count < len(words):
+        while count < len(list):
             if word != count:
-                # print(words[word])
-                # print(words[count])
-                if words[word] == words[count]:
-                    print("dulicate word: " + words[word])
+                if list[i] == list[count]:
+                    dupe.append(list[i])
                     count += 1
                 else:
                     count += 1
@@ -145,7 +149,24 @@ def dupe():
                 count += 1
     time_now = time.time()
     final_time = time_now - current_time
+    print(dupes)
     return "yay"
+
+@app.route("/dupe2")
+def dupe2():
+    arr = [1, 2, 3, 2]
+    arr_size = len(arr)
+    dupes = []
+
+    print("The repeating elements are: ")
+
+    for i in range(0, arr_size):
+        if arr[abs(arr[i])] >= 0:
+            arr[abs(arr[i])] = -arr[abs(arr[i])]
+        else:
+            dupes.append(abs(arr[i]))
+    print(dupes)
+    return jsonify(dupes)
 
 @app.route("/graph")
 def graph():
