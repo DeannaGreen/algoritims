@@ -28,17 +28,15 @@ def sort_time():
 
 @app.route("/last")
 def last_time():
+  co_ords = []
   for i in range (1, 1001, +50):
-      x_co_ord.append(i)
       list = numpy.random.random_integers(1, 1000, i)
       current_time = time.time()
       list[-1]
       time_now = time.time()
       final_time = time_now - current_time
-      y_co_ord.append(final_time)
-      print(x_co_ord)
-      print(y_co_ord)
-  return str(final_time) + " seconds and " + str(i) + " elements in array"
+      co_ords.append([i, final_time])
+  return jsonify(co_ords)
 
 @app.route("/reverse")
 def reverse_time():
