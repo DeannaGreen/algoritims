@@ -13,6 +13,10 @@ app = Flask(__name__)
 def hello():
   return render_template ("home.html")
 
+@app.route("/algorithms")
+def algorithms():
+  return render_template ("algorithms.html")
+
 @app.route("/sort")
 def sort_time():
   co_ords = []
