@@ -17,10 +17,14 @@ def hello():
 def algorithms():
   return render_template ("algorithms.html")
 
+@app.route("/merge")
+def merge():
+  return render_template ("merge.html")
+
 @app.route("/sort")
 def sort_time():
   co_ords = []
-  for i in range (0, 1001, +50):
+  for i in range (0, 1000001, +100000):
       list = numpy.random.random_integers(1, 1000, i)
       current_time = time.time()
       list.sort()
@@ -276,6 +280,61 @@ def sum(arr = [15, 2, 4, 8, 9, 5, 10, 23], n = 8, sum = 21):
     print ("No subarray found")
     return "false"
 
+@app.route("/mergesort")
+def merge2():
+    co_ords = []
+    for i in range (0, 100001, +10000):
+        list = numpy.random.random_integers(1, 1000, i)
+        current_time = time.time()
+        mergeSort(list)
+        time_now = time.time()
+        final_time = time_now - current_time
+        co_ords.append([i, final_time])
+    print(co_ords)
+    return jsonify(co_ords)
+
+
+def mergeSort(alist = [54,26,93,17,77,31,44,55,20]):
+    # co_ords = []
+    # i = len(alist)
+    # current_time = time.time()
+    # print("Splitting ",alist)
+    if len(alist)>1:
+        mid = len(alist)//2
+        lefthalf = alist[:mid]
+        righthalf = alist[mid:]
+
+        mergeSort(lefthalf)
+        mergeSort(righthalf)
+
+        i=0
+        j=0
+        k=0
+        while i < len(lefthalf) and j < len(righthalf):
+            if lefthalf[i] < righthalf[j]:
+                alist[k]=lefthalf[i]
+                i=i+1
+            else:
+                alist[k]=righthalf[j]
+                j=j+1
+            k=k+1
+
+        while i < len(lefthalf):
+            alist[k]=lefthalf[i]
+            i=i+1
+            k=k+1
+
+        while j < len(righthalf):
+            alist[k]=righthalf[j]
+            j=j+1
+            k=k+1
+    # print("Merging ",alist)
+    # time_now = time.time()
+    # final_time = time_now - current_time
+    # co_ords.append([i, final_time])
+    return "aya"
+
+
 @app.route("/graph")
 def graph():
     return render_template ("graph.html")
@@ -284,5 +343,10 @@ def graph():
 def graph2():
     return render_template ("graph2.html")
 
+@app.route("/sortgraph")
+def sortgraph():
+    return render_template ("sortgraph.html")
+
 if __name__ == "__main__":
+  # mergeSort(numpy.random.random_integers(1, 1000, 50))
   app.run()
