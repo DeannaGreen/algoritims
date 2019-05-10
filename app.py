@@ -21,6 +21,10 @@ def algorithms():
 def merge():
   return render_template ("merge.html")
 
+@app.route("/test")
+def test():
+  return render_template ("test.html")
+
 @app.route("/sort")
 def sort_time():
   co_ords = []
