@@ -74,7 +74,7 @@ def shuffle_time():
 @app.route("/my_shuffle")
 def my_shuffle():
   co_ords = []
-  for k in range (0, 1001, +50):
+  for k in range (0, 100001, +10000):
       list = numpy.random.random_integers(1, 100, k)
       current_time = time.time()
       print(list)
@@ -109,7 +109,7 @@ def my_last():
 @app.route("/my_reverse")
 def my_reverse():
   co_ords = []
-  for k in range (1, 1001, +50):
+  for k in range (0, 100001, +10000):
       list = numpy.random.random_integers(1, 100, k)
       current_time = time.time()
       # print(list)
@@ -183,19 +183,13 @@ def dupe():
 
 @app.route("/dupe2")
 def dupe2(arr = numpy.random.random_integers(1, 5, 6)):
-    # arr = numpy.random.random_integers(1, 5, 6)
     arr_size = len(arr)
     dupes = []
-    # print(arr)
-
-    # print("The repeating elements are: ")
-
     for i in range(0, arr_size):
         if arr[abs(arr[i])] >= 0:
             arr[abs(arr[i])] = -arr[abs(arr[i])]
         else:
             dupes.append(abs(arr[i]))
-    # print(dupes)
     return str(dupes)
 
 @app.route("/dupe3")
@@ -295,18 +289,13 @@ def merge2():
 
 
 def mergeSort(alist = [54,26,93,17,77,31,44,55,20]):
-    # co_ords = []
-    # i = len(alist)
-    # current_time = time.time()
     # print("Splitting ",alist)
     if len(alist)>1:
         mid = len(alist)//2
         lefthalf = alist[:mid]
         righthalf = alist[mid:]
-
         mergeSort(lefthalf)
         mergeSort(righthalf)
-
         i=0
         j=0
         k=0
@@ -318,20 +307,15 @@ def mergeSort(alist = [54,26,93,17,77,31,44,55,20]):
                 alist[k]=righthalf[j]
                 j=j+1
             k=k+1
-
         while i < len(lefthalf):
             alist[k]=lefthalf[i]
             i=i+1
             k=k+1
-
         while j < len(righthalf):
             alist[k]=righthalf[j]
             j=j+1
             k=k+1
     # print("Merging ",alist)
-    # time_now = time.time()
-    # final_time = time_now - current_time
-    # co_ords.append([i, final_time])
     return "aya"
 
 
