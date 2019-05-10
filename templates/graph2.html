@@ -4,18 +4,41 @@
 <script src="https://code.highcharts.com/modules/exporting.js"></script>
 <script src="https://code.highcharts.com/modules/export-data.js"></script>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<style>
+  #img-container {
+    text-align: center;
+  }
+</style>
 
 <div>
   <a href="/" class="btn btn-dark">Back</a>
 
-  <div id="sort"></div>
+  <div id="sort">
+    <div id="img-container">
+      <img style="align: center;" id="spinner" src="../static/chart_loader.gif"/>
+    </div>
+  </div>
 
-  <div id="last"></div>
+  <div id="last">
+    <div id="img-container">
+      <img style="align: center;" id="spinner" src="../static/chart_loader.gif"/>
+    </div>
+  </div>
 
-  <div id="reverse"></div>
-
-  <div id="shuffle"></div>
+  <div id="reverse">
+    <div id="img-container">
+      <img style="align: center;" id="spinner" src="../static/chart_loader.gif"/>
+    </div>
+  </div>
 </div>
+
+<script>
+  $(document).ajaxStart ->
+  $("#spinner").show()
+
+  $(document).ajaxComplete ->
+  $("#spinner").hide()
+</script>
 
 <script>
   $(function () {
